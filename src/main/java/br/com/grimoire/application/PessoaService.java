@@ -43,18 +43,6 @@ public class PessoaService implements PessoaUseCases {
         }
 
         @Override
-        public Pessoa buscarPessoaPeloPrimeiroNome(String primeiroNome) {
-
-                PessoaEntity pessoaEntityDB = pessoaRepository.findByPrimeiroNome(primeiroNome);
-
-                if (pessoaEntityDB == null) {
-                        throw new NotFoundException("Pessoa nao encontrada");
-                }
-
-                return pessoaEntityDB.toPessoa();
-        }
-
-        @Override
         @Transactional
         public Pessoa salvarPessoa(Pessoa pessoa) {
                 PessoaEntity pessoaEntity = new PessoaEntity(pessoa);
@@ -99,6 +87,18 @@ public class PessoaService implements PessoaUseCases {
                 buscarPessoaPeloId(id);
 
                 pessoaRepository.deleteById(id);
+        }
+
+        @Override
+        public Integer incrementarClique(Long idPessoa, Integer cliquesParaAdicionar) {
+
+                Pessoa pessoa = buscarPessoaPeloId(idPessoa);
+
+                pessoa.incrementaCliques(cliquesParaAdicionar);
+
+                atualizarPessoa(idPessoa, pessoa);
+
+                return pessoa.getQuantidadeCliqueTotal();
         }
 
 }

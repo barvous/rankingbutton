@@ -29,6 +29,19 @@ public class Pessoa {
                 this.quantidadeCliqueTotal = quantidadeCliqueTotal;
         }
 
+        public Integer incrementaCliques(Integer cliquesParaAdicionar) {
+
+                if (cliquesParaAdicionar == null) {
+                        throw new BadRequestException("quantidade de cliques para adicionar inválida");
+                }
+
+                Integer novoTotalDeCliques = quantidadeCliqueTotal + cliquesParaAdicionar;
+
+                setQuantidadeCliqueTotal(novoTotalDeCliques);
+
+                return getQuantidadeCliqueTotal();
+        }
+
         public Long getId() {
                 return id;
         }

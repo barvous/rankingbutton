@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.grimoire.domain.Pessoa;
 import br.com.grimoire.domain.PessoaUseCases;
+import br.com.grimoire.framework.dto.IncrementaCliqueDTO;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -13,7 +14,6 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -42,14 +42,6 @@ public class PessoaController {
                 return Response.status(Response.Status.OK).entity(pessoa).build();
         }
 
-        @GET
-        @Path("/filter")
-        public Response buscarPessoaPeloPrimeiroNome(@QueryParam("primeiro_nome") String primeiroNome) {
-                Pessoa pessoa = pessoaUserCases.buscarPessoaPeloPrimeiroNome(primeiroNome);
-
-                return Response.status(Response.Status.OK).entity(pessoa).build();
-        }
-
         @POST
         public Response salvarPessoa(Pessoa pessoa) {
 
@@ -65,6 +57,17 @@ public class PessoaController {
                 pessoaUserCases.atualizarPessoa(idPessoa, pessoa);
 
                 return Response.status(Response.Status.OK).build();
+        }
+
+        @PUT
+        @Path("/{id_pessoa}/incrementar-clique")
+        public Response incrementarClique(@PathParam("id_pessoa") Long idPessoa,
+                        IncrementaCliqueDTO incrementaCliqueDTO) {
+
+                Integer quantidadeCliqueAtual = pessoaUserCases.incrementarClique(idPessoa,
+                                incrementaCliqueDTO.getCliqueIncrement());
+
+                return Response.status(Response.Status.OK).entity(quantidadeCliqueAtual).build();
         }
 
         @DELETE

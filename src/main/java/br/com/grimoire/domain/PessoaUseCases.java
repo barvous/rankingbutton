@@ -8,11 +8,11 @@ public interface PessoaUseCases {
 
         Pessoa buscarPessoaPeloId(Long id);
 
-        Pessoa buscarPessoaPeloPrimeiroNome(String primeiroNome);
-
         Pessoa salvarPessoa(Pessoa pessoa);
-
+        
         void atualizarPessoa(Long id, Pessoa pessoa);
 
         void deletarPessoaPeloId(Long id);
+
+        Integer incrementarClique(Long idPessoa, Integer cliquesParaAdicionar);
 }
