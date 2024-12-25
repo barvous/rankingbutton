@@ -1,4 +1,4 @@
-package br.com.grimoire;
+package br.com.grimoire.framework;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Pessoa {
+public class PessoaEntity {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +32,10 @@ public class Pessoa {
         @Column(name = "quantidade_clique_total_pessoa")
         private Integer quantidadeCliqueTotal;
 
-        public Pessoa() {
+        public PessoaEntity() {
         }
 
-        public Pessoa(Long id, String codigoIntegracao, String apelido, String primeiroNome, String ultimoNome,
+        public PessoaEntity(Long id, String codigoIntegracao, String apelido, String primeiroNome, String ultimoNome,
                         Integer quantidadeCliqueAtual, Integer quantidadeCliqueTotal) {
                 this.id = id;
                 this.codigoIntegracao = codigoIntegracao;
@@ -118,7 +118,7 @@ public class Pessoa {
                         return false;
                 if (getClass() != obj.getClass())
                         return false;
-                Pessoa other = (Pessoa) obj;
+                PessoaEntity other = (PessoaEntity) obj;
                 if (id == null) {
                         if (other.id != null)
                                 return false;

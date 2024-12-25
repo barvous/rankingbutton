@@ -1,4 +1,4 @@
-package br.com.grimoire;
+package br.com.grimoire.framework;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -15,7 +15,7 @@ public class PessoaController {
         @GET
         @Produces(MediaType.TEXT_PLAIN)
         public String hello() {
-                Pessoa pessoa = pessoaRepository.findByPrimeiroNome("marcos");
+                PessoaEntity pessoa = pessoaRepository.findByPrimeiroNome("marcos");
                 if (pessoa == null) {
                         return "null";
                 } else {
