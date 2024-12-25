@@ -1,42 +1,27 @@
-package br.com.grimoire.framework;
+package br.com.grimoire.domain;
 
-import br.com.grimoire.domain.Pessoa;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import br.com.grimoire.domain.exception.BadRequestException;
 
-@Entity
-public class PessoaEntity {
+public class Pessoa {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Column(name = "id_pessoa")
         private Long id;
 
-        @Column(name = "codigo_integracao_pessoa")
         private String codigoIntegracao;
 
-        @Column(name = "apelido_pessoa")
         private String apelido;
 
-        @Column(name = "primeiro_nome_pessoa")
         private String primeiroNome;
 
-        @Column(name = "ultimo_nome_pessoa")
         private String ultimoNome;
 
-        @Column(name = "quantidade_clique_atual_pessoa")
         private Integer quantidadeCliqueAtual;
 
-        @Column(name = "quantidade_clique_total_pessoa")
         private Integer quantidadeCliqueTotal;
 
-        public PessoaEntity() {
+        public Pessoa() {
         }
 
-        public PessoaEntity(Long id, String codigoIntegracao, String apelido, String primeiroNome, String ultimoNome,
+        public Pessoa(Long id, String codigoIntegracao, String apelido, String primeiroNome, String ultimoNome,
                         Integer quantidadeCliqueAtual, Integer quantidadeCliqueTotal) {
                 this.id = id;
                 this.codigoIntegracao = codigoIntegracao;
@@ -47,21 +32,16 @@ public class PessoaEntity {
                 this.quantidadeCliqueTotal = quantidadeCliqueTotal;
         }
 
-        public PessoaEntity(Pessoa pessoa) {
-                this.id = pessoa.getId();
-                this.codigoIntegracao = pessoa.getCodigoIntegracao();
-                this.apelido = pessoa.getApelido();
-                this.primeiroNome = pessoa.getPrimeiroNome();
-                this.ultimoNome = pessoa.getUltimoNome();
-                this.quantidadeCliqueAtual = pessoa.getQuantidadeCliqueAtual();
-                this.quantidadeCliqueTotal = pessoa.getQuantidadeCliqueTotal();
-        }
-
         public Long getId() {
                 return id;
         }
 
         public void setId(Long id) {
+
+                if (id == null || id < 0) {
+                        throw new BadRequestException("O parametro 'id' é inválido");
+                }
+
                 this.id = id;
         }
 
@@ -78,6 +58,11 @@ public class PessoaEntity {
         }
 
         public void setApelido(String apelido) {
+
+                if (apelido == null || apelido.isBlank()) {
+                        throw new BadRequestException("O parametro 'apelido' é obrigatorio");
+                }
+
                 this.apelido = apelido;
         }
 
@@ -86,6 +71,11 @@ public class PessoaEntity {
         }
 
         public void setPrimeiroNome(String primeiroNome) {
+
+                if (primeiroNome == null || primeiroNome.isBlank()) {
+                        throw new BadRequestException("O parametro 'primeiro_nome' é obrigatorio");
+                }
+
                 this.primeiroNome = primeiroNome;
         }
 
@@ -94,6 +84,11 @@ public class PessoaEntity {
         }
 
         public void setUltimoNome(String ultimoNome) {
+
+                if (ultimoNome == null || ultimoNome.isBlank()) {
+                        throw new BadRequestException("O parametro 'ultimo_nome' é obrigatorio");
+                }
+
                 this.ultimoNome = ultimoNome;
         }
 
@@ -113,11 +108,6 @@ public class PessoaEntity {
                 this.quantidadeCliqueTotal = quantidadeCliqueTotal;
         }
 
-        public Pessoa toPessoa() {
-                return new Pessoa(this.id, this.codigoIntegracao, this.apelido, this.primeiroNome, this.ultimoNome,
-                                this.quantidadeCliqueAtual, this.quantidadeCliqueTotal);
-        }
-
         @Override
         public int hashCode() {
                 final int prime = 31;
@@ -134,7 +124,7 @@ public class PessoaEntity {
                         return false;
                 if (getClass() != obj.getClass())
                         return false;
-                PessoaEntity other = (PessoaEntity) obj;
+                Pessoa other = (Pessoa) obj;
                 if (id == null) {
                         if (other.id != null)
                                 return false;
@@ -150,5 +140,4 @@ public class PessoaEntity {
                                 + ", quantidadeCliqueAtual=" + quantidadeCliqueAtual + ", quantidadeCliqueTotal="
                                 + quantidadeCliqueTotal + "]";
         }
-
 }

@@ -6,7 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class PessoaRepository implements PanacheRepository<PessoaEntity>{
         
-       PessoaEntity findByPrimeiroNome(String primeiroNome){
+       public PessoaEntity findByPrimeiroNome(String primeiroNome){
         return find("primeiroNome", primeiroNome).firstResult();
        }
 }
