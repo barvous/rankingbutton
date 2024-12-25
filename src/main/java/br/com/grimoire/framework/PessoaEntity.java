@@ -6,8 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "pessoa")
 public class PessoaEntity {
 
         @Id
@@ -27,9 +29,6 @@ public class PessoaEntity {
         @Column(name = "ultimo_nome_pessoa")
         private String ultimoNome;
 
-        @Column(name = "quantidade_clique_atual_pessoa")
-        private Integer quantidadeCliqueAtual;
-
         @Column(name = "quantidade_clique_total_pessoa")
         private Integer quantidadeCliqueTotal;
 
@@ -37,13 +36,12 @@ public class PessoaEntity {
         }
 
         public PessoaEntity(Long id, String codigoIntegracao, String apelido, String primeiroNome, String ultimoNome,
-                        Integer quantidadeCliqueAtual, Integer quantidadeCliqueTotal) {
+                        Integer quantidadeCliqueTotal) {
                 this.id = id;
                 this.codigoIntegracao = codigoIntegracao;
                 this.apelido = apelido;
                 this.primeiroNome = primeiroNome;
                 this.ultimoNome = ultimoNome;
-                this.quantidadeCliqueAtual = quantidadeCliqueAtual;
                 this.quantidadeCliqueTotal = quantidadeCliqueTotal;
         }
 
@@ -53,7 +51,6 @@ public class PessoaEntity {
                 this.apelido = pessoa.getApelido();
                 this.primeiroNome = pessoa.getPrimeiroNome();
                 this.ultimoNome = pessoa.getUltimoNome();
-                this.quantidadeCliqueAtual = pessoa.getQuantidadeCliqueAtual();
                 this.quantidadeCliqueTotal = pessoa.getQuantidadeCliqueTotal();
         }
 
@@ -97,14 +94,6 @@ public class PessoaEntity {
                 this.ultimoNome = ultimoNome;
         }
 
-        public Integer getQuantidadeCliqueAtual() {
-                return quantidadeCliqueAtual;
-        }
-
-        public void setQuantidadeCliqueAtual(Integer quantidadeCliqueAtual) {
-                this.quantidadeCliqueAtual = quantidadeCliqueAtual;
-        }
-
         public Integer getQuantidadeCliqueTotal() {
                 return quantidadeCliqueTotal;
         }
@@ -115,7 +104,7 @@ public class PessoaEntity {
 
         public Pessoa toPessoa() {
                 return new Pessoa(this.id, this.codigoIntegracao, this.apelido, this.primeiroNome, this.ultimoNome,
-                                this.quantidadeCliqueAtual, this.quantidadeCliqueTotal);
+                                this.quantidadeCliqueTotal);
         }
 
         @Override
@@ -145,10 +134,9 @@ public class PessoaEntity {
 
         @Override
         public String toString() {
-                return "Pessoa [id=" + id + ", codigoIntegracao=" + codigoIntegracao + ", apelido=" + apelido
+                return "PessoaEntity [id=" + id + ", codigoIntegracao=" + codigoIntegracao + ", apelido=" + apelido
                                 + ", primeiroNome=" + primeiroNome + ", ultimoNome=" + ultimoNome
-                                + ", quantidadeCliqueAtual=" + quantidadeCliqueAtual + ", quantidadeCliqueTotal="
-                                + quantidadeCliqueTotal + "]";
+                                + ", quantidadeCliqueTotal=" + quantidadeCliqueTotal + "]";
         }
 
 }

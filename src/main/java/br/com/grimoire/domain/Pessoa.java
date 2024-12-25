@@ -14,21 +14,18 @@ public class Pessoa {
 
         private String ultimoNome;
 
-        private Integer quantidadeCliqueAtual;
-
         private Integer quantidadeCliqueTotal;
 
         public Pessoa() {
         }
 
         public Pessoa(Long id, String codigoIntegracao, String apelido, String primeiroNome, String ultimoNome,
-                        Integer quantidadeCliqueAtual, Integer quantidadeCliqueTotal) {
+                        Integer quantidadeCliqueTotal) {
                 this.id = id;
                 this.codigoIntegracao = codigoIntegracao;
                 this.apelido = apelido;
                 this.primeiroNome = primeiroNome;
                 this.ultimoNome = ultimoNome;
-                this.quantidadeCliqueAtual = quantidadeCliqueAtual;
                 this.quantidadeCliqueTotal = quantidadeCliqueTotal;
         }
 
@@ -92,14 +89,6 @@ public class Pessoa {
                 this.ultimoNome = ultimoNome;
         }
 
-        public Integer getQuantidadeCliqueAtual() {
-                return quantidadeCliqueAtual;
-        }
-
-        public void setQuantidadeCliqueAtual(Integer quantidadeCliqueAtual) {
-                this.quantidadeCliqueAtual = quantidadeCliqueAtual;
-        }
-
         public Integer getQuantidadeCliqueTotal() {
                 return quantidadeCliqueTotal;
         }
@@ -137,7 +126,7 @@ public class Pessoa {
         public String toString() {
                 return "Pessoa [id=" + id + ", codigoIntegracao=" + codigoIntegracao + ", apelido=" + apelido
                                 + ", primeiroNome=" + primeiroNome + ", ultimoNome=" + ultimoNome
-                                + ", quantidadeCliqueAtual=" + quantidadeCliqueAtual + ", quantidadeCliqueTotal="
-                                + quantidadeCliqueTotal + "]";
+                                + ", quantidadeCliqueTotal=" + quantidadeCliqueTotal + "]";
         }
+
 }

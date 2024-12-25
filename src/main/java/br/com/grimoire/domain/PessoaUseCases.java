@@ -2,7 +2,7 @@ package br.com.grimoire.domain;
 
 import java.util.List;
 
-public interface IPessoa {
+public interface PessoaUseCases {
 
         List<Pessoa> listarPessoas();
 
